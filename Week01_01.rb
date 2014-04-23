@@ -10,7 +10,7 @@ end
 def get_sum (integer)
 	result = 0
 	(integer+1).times do |n|
-		result = result + n
+		result += n
 	end
 	result
 end

@@ -6,16 +6,17 @@
 def get_input
 	puts "Enter a distance in metres: "
 	STDOUT.flush
-	gets.chomp.to_i
+	gets.chomp.to_f
 end
 
 def convert_to_feet_and_inches (metres)
-	inches = metres / 0.0254
-	puts "In inches it is #{inches}"
-	inches
+	total_inches = metres / 0.0254
+	feet = total_inches.to_i / 12
+	inches = total_inches % 12
+	return feet, inches
 end
 
 metres = get_input
 puts "The input is #{metres}"
-sum = convert_to_feet_and_inches(metres)
-puts "The sum is #{sum}"
+result = convert_to_feet_and_inches(metres)
+puts "The converted distance is #{result[0]} feet and #{result[1]} inches"
