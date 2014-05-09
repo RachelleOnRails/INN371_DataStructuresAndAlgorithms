@@ -1,25 +1,19 @@
+require_relative '../lib/Week01_01'
+
+
 describe Week01_01 do
 
-  context 'invalid input' do
-    # figure out how to simulate keyboard input
-    # send it a negative integer
-    # send it a zero
-    # send it a float
-    # send it a character string
-    # expect error message (which it currently doesn't do)
-    describe "negative integer" do
-    end
-    describe "zero" do
-    end
-    describe "float" do
-    end
-    describe "character string" do
-    end
+
+  it '1' do
+    Week01_01.get_sum(1).should == 1
   end
 
-  context 'valid input' do
-    # figure out how to simulate keyboard input
-    # send it a positive integer, say 10
-    # expect output to be 55
+  it '2' do
+    Week01_01.get_sum(2).should == 3
   end
+
+  it '6' do
+    Week01_01.get_sum(6).should == 21
+  end
+
 end
