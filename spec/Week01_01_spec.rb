@@ -2,15 +2,15 @@ require_relative '../lib/Week01_01'
 
 describe Week01_01 do
 
-  it '1' do
-    Week01_01.get_sum(1).should == 1
-  end
+  # Success cases
+  it('1') { Week01_01.get_sum(1).should == 1  }
+  it('2') { Week01_01.get_sum(2).should == 3  }
+  it('6') { Week01_01.get_sum(6).should == 21 }
 
-  it '2' do
-    Week01_01.get_sum(2).should == 3
-  end
+  # Failure cases
+  it('float') { expect { Week01_01.get_sum(3.14159) }.to raise_error(RuntimeError) }
+  it('-10')   { expect { Week01_01.get_sum(-10) }.to raise_error(RuntimeError) }
+  it('0')     { expect { Week01_01.get_sum(0) }.to raise_error(RuntimeError) }
+  it('a')     { expect { Week01_01.get_sum('a') }.to raise_error(RuntimeError) }
 
-  it '6' do
-    Week01_01.get_sum(6).should == 21
-  end
 end
