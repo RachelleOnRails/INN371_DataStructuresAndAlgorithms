@@ -10,14 +10,43 @@
 # To make sure your program can handle integers as large as the one shown in the example,
 # use the type long instead of int in your program.
 
-def get_input
-	puts "Enter an integer: "
-	STDOUT.flush
-	gets.chomp
+class InvalidInput < StandardError
 end
 
-input = get_input
-reverse = input.reverse
+class Week01_05
 
-puts "The input is #{input}"
-puts "The reverse is #{reverse}"
+  def self.valid?(input)
+    input.to_s[/^[0-9]\d*$/] # all integers
+  end
+
+  def self.call(input)
+    if valid? input
+      reverse = reverse(input.to_s)
+      puts "The input is #{input}"
+      puts "The reverse is #{reverse}"
+      reverse
+    else
+      raise InvalidInput
+    end
+  end
+
+  def self.get_input
+    puts "Enter an integer: "
+    STDOUT.flush
+    gets.chomp
+  end
+
+  def self.reverse (input)
+    input.reverse.to_i
+  end
+
+end
+
+if __FILE__ == $0
+  n = Week01_05.get_input
+  begin
+    Week01_05.call(n)
+  rescue InvalidInput
+    puts "Invalid input. Only integers are accepted."
+  end
+end
