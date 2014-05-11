@@ -9,7 +9,7 @@ end
 class Week01_03
 
   def self.valid?(input)
-    input.to_s[/^[0-9]*\.?[0-9]*$/]
+    input.to_s[/^[0-9]*\.?[0-9]*$/] # all numbers (integers, float, zero)
   end
 
   def self.call(metres)

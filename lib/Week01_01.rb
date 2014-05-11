@@ -7,7 +7,7 @@ end
 class Week01_01
 
   def self.valid?(input)
-    input.to_s[/^[1-9]\d*$/]
+    input.to_s[/^[1-9]\d*$/] # positive integers only (not zero)
   end
 
   def self.call(number)
