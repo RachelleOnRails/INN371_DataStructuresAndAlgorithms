@@ -2,28 +2,47 @@
 # the sum of the first N odd integers.
 # For example, if N is 4, your program should display the value 16, which is 1 + 3 + 5 + 7.
 
-def get_input
-	puts "Enter a positive integer: "
-	STDOUT.flush
-	gets.chomp
+class InvalidInput < StandardError
 end
 
-def validate_input(n)
-  # Invalid inputs:
-  raise("Only positive integers are accepted. Not #{n}") if n.to_i == 0 || n.to_i < 0
-  raise("No floats. Only integers are accepted. Not #{n}") unless n.to_f / n.to_i == 1
+class Week01_02
+
+  def self.valid?(input)
+    input.to_s[/^[1-9]\d*$/]
+  end
+
+  def self.call(number)
+    if valid? number
+      sum = calculate(number.to_i)
+      puts "The sum is #{sum}"
+      sum
+    else
+      raise InvalidInput
+      # puts "Invalid input. Only positive integers are accepted."
+    end
+  end
+
+  def self.get_input
+    puts "Enter a positive integer: "
+    STDOUT.flush
+    gets.chomp
+  end
+
+  def self.calculate (n)
+    result = 0
+    n.to_i.times do |x|
+      result += ((x * 2) + 1)
+    end
+    result
+  end
+
 end
 
-def get_sum (n)
-	result = 0
-	n.to_i.times do |x|
-		result += ((x * 2) + 1)
-	end
-	result
+if __FILE__ == $0
+  n = Week01_02.get_input
+  begin
+    Week01_02.call(n)
+  rescue InvalidInput
+    puts "Invalid input. Only positive integers are accepted."
+  end
 end
-
-n = get_input
-puts "The input is #{n}"
-validate_input(n)
-sum = get_sum(n.to_i)
-puts "The sum is #{sum}"
