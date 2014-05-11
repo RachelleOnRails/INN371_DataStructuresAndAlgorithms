@@ -16,34 +16,35 @@ end
 
 class Week01_04
 
-  def self.valid?(inputs)
-    inputs.each do |input|
-      if input.to_s[/^[1-9]\d*$/] == 0
-        return nil
-      end
-    end
+  def self.valid?(input)
+    input.to_s[/^[1-9]\d*$/] # positive integers only (not zero)
   end
 
   def self.call(inputs)
-    if valid? inputs
-      greatest = find_greatest (inputs)
-      puts "The greatest is #{greatest}"
-      greatest
-    else
-      raise InvalidInput
+    new_inputs = []
+    inputs.each do |input|
+      new_inputs << Week01_04.valid?(input)
     end
+
+    puts 'Invalid input ignored. Only positive integers are accepted.' unless new_inputs.size == new_inputs.compact.size
+    inputs = new_inputs.compact
+
+    greatest = find_greatest (inputs)
+    puts "The greatest is #{greatest}"
+    greatest
   end
 
   def self.get_input
     puts "Enter a positive integer (or zero to exit): "
     STDOUT.flush
-    gets.chomp.to_i
+    gets.chomp
   end
 
   def self.find_greatest (inputs)
     greatest = 0
 
     inputs.each do |n|
+      n = n.to_i
       greatest = n if n > greatest
     end
     greatest
@@ -57,13 +58,12 @@ if __FILE__ == $0
 
   loop do
     new = Week01_04.get_input
-    break if new == 0
-    inputs << new
+    break if new == '0'
+    inputs << Week01_04.valid?(new)
+    puts 'Invalid input ignored. Only positive integers are accepted.' unless inputs.size == inputs.compact.size
+    inputs.compact
   end
 
-  begin
-    Week01_04.call(inputs)
-  rescue InvalidInput
-    puts "Invalid input. Only positive integers are accepted."
-  end
+  Week01_04.call(inputs)
+
 end
