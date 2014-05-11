@@ -1,25 +1,43 @@
 # Write a program that reads in a positive integer N and then calculates and displays
 # the sum of the numbers from 1 to N.
-def get_input
-  puts "Enter a positive integer: "
-  STDOUT.flush
-  gets.chomp
-end
 
-def validate_input(n)
-  # Invalid inputs:
-  raise("Only positive integers are accepted. Not #{n}") if n.to_i == 0 || n.to_i < 0
-  raise("No floats. Only integers are accepted. Not #{n}") unless n.to_f / n.to_i == 1
+class InvalidInput < StandardError
 end
 
 class Week01_01
-  def self.get_sum(n)
-    (1..n).inject(0) { |sum, x| sum += x }
+
+  def self.valid?(input)
+    input.to_s[/^[1-9]\d*$/]
   end
+
+  def self.call(number)
+    if valid? number
+      sum = calculate(number.to_i)
+      puts "The sum is #{sum}"
+      sum
+    else
+      raise InvalidInput
+      # puts "Invalid input. Only positive integers are accepted."
+    end
+  end
+
+  def self.get_input
+    puts "Enter a positive integer: "
+    STDOUT.flush
+    gets.chomp
+  end
+
+  def self.calculate(n)
+    (1..n).inject(0) { |sum, x| sum + x }
+  end
+
 end
 
-n = get_input
-puts "The integer is #{n}"
-validate_input(n)
-sum = Week01_01::get_sum(n.to_i)
-puts "The sum is #{sum}"
+if __FILE__ == $0
+  n = Week01_01.get_input
+  begin
+    Week01_01.call(n)
+  rescue InvalidInput
+    puts "Invalid input. Only positive integers are accepted."
+  end
+end
