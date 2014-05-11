@@ -18,7 +18,6 @@ class Week01_02
       sum
     else
       raise InvalidInput
-      # puts "Invalid input. Only positive integers are accepted."
     end
   end
 
